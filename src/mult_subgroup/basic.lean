@@ -86,4 +86,14 @@ lemma ne_zero_of_one_minus_mul_left {a b : K} : 1 - a * b ∉ H → a ≠ 0 :=
 lemma ne_zero_of_one_minus_mul_right {a b : K} : 1 - a * b ∉ H → b ≠ 0 :=
 λ h c, h $ by simp [c, H.one_mem]
 
+instance : has_inf (mult_subgroup K) := has_inf.mk $ λ A B,
+{ carrier := A ∩ B,
+  zero_nmem' := λ c, A.zero_nmem c.1,
+  one_mem' := ⟨A.one_mem, B.one_mem⟩,
+  mul_mem' := λ x y h1 h2, ⟨A.mul_mem h1.1 h2.1, B.mul_mem h1.2 h2.2⟩,
+  inv_mem' := λ x h, ⟨A.inv_mem h.1, B.inv_mem h.2⟩ }
+
+lemma inf_le_left (A B : mult_subgroup K) : A ⊓ B ≤ A := λ a h, h.1
+lemma inf_le_right (A B : mult_subgroup K) : A ⊓ B ≤ B := λ b h, h.2
+
 end mult_subgroup
