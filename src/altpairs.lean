@@ -9,7 +9,7 @@ structure log (K F : Type*) [field K] [field F] :=
 (map_mul' (x y) : to_fun (x * y) = to_fun x + to_fun y)
 (map_zero' : to_fun 0 = 0) -- junk value
 
-variables (K F : Type*) [field K] [field F] (f : log K F)
+variables {K F : Type*} [field K] [field F] (f : log K F)
 
 namespace log
 
@@ -83,6 +83,8 @@ def ker (f : log K F) : mult_subgroup K :=
   one_mem' := ⟨one_ne_zero, by simp⟩,
   mul_mem' := λ x y ⟨h1,h2⟩ ⟨h3,h4⟩, ⟨mul_ne_zero h1 h3, by simp [h2, h4]⟩,
   inv_mem' := λ x ⟨h1,h2⟩, ⟨inv_ne_zero h1, by simpa⟩ }
+
+@[simp] lemma mem_ker_iff {x : K} : x ∈ f.ker ↔ x ≠ 0 ∧ f x = 0 := by tidy
 
 end log
 

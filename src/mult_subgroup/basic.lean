@@ -22,6 +22,8 @@ variables (H : mult_subgroup K) {K}
 
 @[simp] lemma mem_coe_iff {x : K} : x ∈ (H : set K) ↔ x ∈ H := by tauto
 
+lemma le_refl (A : mult_subgroup K) : A ≤ A := λ a, id
+
 lemma le_trans {A B C : mult_subgroup K} : A ≤ B → B ≤ C → A ≤ C := λ h1 h2 x hx, h2 $ h1 hx
 
 lemma zero_nmem : (0 : K) ∉ H := H.zero_nmem'
