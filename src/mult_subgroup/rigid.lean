@@ -11,7 +11,16 @@ namespace mult_subgroup
 def rigid (x : K) : Prop := ∀ (h0 h1 : K), h0 ∈ H → h1 ∈ H →
   h0 + x * h1 ∈ H.coset 1 ∨ h0 + x * h1 ∈ H.coset x
 
+lemma rigid_zero : H.rigid 0 :=
+begin
+  intros u v hu hv,
+  left,
+  simpa,
+end
+
 def birigid (x : K) : Prop := H.rigid x ∧ H.rigid (-x)
+
+lemma birigid_zero : H.birigid 0 := by simp [birigid, rigid_zero]
 
 def exceptional : Prop :=
 (∀ x : K, x = 0 ∨ ((¬ H.birigid x) → (x ∈ H ∨ -x ∈ H))) ∧
