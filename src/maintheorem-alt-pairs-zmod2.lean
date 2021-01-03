@@ -20,6 +20,9 @@ variable (alt : alternating f g)
 
 include alt cond
 
+/--
+This is the fundamental theorem of alternating pairs, in the `zmod 2` case.
+-/
 theorem alt_pair_theorem : ∃ (R : val_subring K) (a b : zmod 2),
   (a ≠ 0 ∨ b ≠ 0) ∧
   R.principal_units ⊆ f.ker ⊓ g.ker ∧
@@ -41,10 +44,7 @@ begin
         refine ⟨h1, _⟩,
         simpa [← ha] },
       simp,
-      intros u hu,
-      apply this,
-      apply h3,
-      exact hu },
+      exact λ _ hu, this (h3 hu) },
     { change b = 1 at h_1,
       use 1, use 0,
       refine ⟨or.inl one_ne_zero, h4, _⟩,
@@ -55,10 +55,7 @@ begin
         simp,
         refine ⟨h1, _⟩,
         simpa [← ha] },
-      intros u hu,
-      apply this,
-      apply h3,
-      exact hu },
+      exact λ _ hu, this (h3 hu) },
     { change a = 1 at h,
       use 0, use 1,
       refine ⟨or.inr one_ne_zero, h4, _⟩,
@@ -69,10 +66,7 @@ begin
         simp,
         refine ⟨h1, _⟩,
         simpa [← hb] },
-      intros u hu,
-      apply this,
-      apply h3,
-      exact hu },
+      exact λ _ hu, this (h3 hu) },
     { change a = 1 at h,
       change b = 1 at h_1,
       use 1, use 1,
@@ -86,20 +80,13 @@ begin
         simp at ht1 ht2 ⊢,
         refine ⟨ht1.1, _⟩,
         simp [ht1.2, ht2.2],
-        simp,
         refine ⟨h1, _⟩,
         simp [← ha, ← hb, h, h_1] },
-      intros u hu,
-      apply this,
-      apply h3,
-      exact hu } },
+      exact λ _ hu, this (h3 hu) } },
   { rcases cond with ⟨a,ha⟩,
     rw ← ha,
     split,
-    { simp,
-      intro c,
-      simpa [c] using ha },
-    { simp,
+    all_goals { simp,
       intro c,
       simpa [c] using ha }},
   { intros x hx,
