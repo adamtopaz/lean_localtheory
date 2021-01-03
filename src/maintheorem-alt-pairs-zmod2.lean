@@ -5,7 +5,7 @@ import .zmod2_helpers
 variables (K : Type*) [field K]
 variables (f g : log K (zmod 2))
 variable (cond : ∃ a : K, a * a = -1)
-variable (alt : alternating f g)
+variable (alt : ∀ x : K, f x *  g (1 - x) = f (1 - x) * g x)
 
 include alt cond
 
