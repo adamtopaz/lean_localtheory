@@ -5,6 +5,14 @@ import data.nat.prime
 
 instance is_prime_2 : fact (nat.prime 2) := nat.prime_two
 
+@[simp] lemma zmod2_eq_zero_iff_ne_one {a : zmod 2} : ¬ (a = 1) ↔ a = 0 := sorry
+
+@[simp] lemma zmod2_eq_one_of_ne_zero {a : zmod 2} : ¬ (a = 0) ↔ a = 1 := sorry
+
+@[simp] lemma zmod2_2_eq_0 : (2 : zmod 2) = 0 := rfl
+
+@[simp] lemma zmod2_add_self {a : zmod 2} : a + a = 0 := by {rw (show a + a = 2 * a, by ring), simp}
+
 variables (K : Type*) [field K]
 variables (f g : log K (zmod 2))
 variable (cond : ∃ a : K, a * a = -1)
@@ -26,19 +34,43 @@ begin
     rw ← ha,
     split,
     { simp,
-      split,
       intro c,
-      simpa [c] using ha,
-      rw (show f a + f a = 2 * f a, by ring),
-      rw (show (2 : zmod 2) = 0, by dec_trivial),
-      simp },
+      simpa [c] using ha },
     { simp,
-      split,
       intro c,
-      simpa [c] using ha,
-      rw (show g a + g a = 2 * g a, by ring),
-      rw (show (2 : zmod 2) = 0, by dec_trivial),
-      simp }
-  },
-  { sorry }
+      simpa [c] using ha }},
+  { intros x hx,
+    by_cases hxnez : x = 0,
+    { left, simp [hxnez, T.one_mem] },
+    erw not_and_distrib at hx,
+    cases hx,
+    { simp at hx,
+      specialize hx hxnez,
+      specialize alt x,
+      rw [hx, one_mul] at alt,
+      have hx2 : 1 - x ≠ 0,
+      { intro c,
+        apply_fun (λ t, t + x) at c,
+        simp at c,
+        rw ← c at hx,
+        simpa using hx },
+      by_cases hfox : f (1 - x) = 0,
+      { simp [hfox] at alt,
+        left,
+        split; simp,
+        refine ⟨hx2, hfox⟩,
+        refine ⟨hx2, alt⟩ },
+      simp at hfox,
+      simp [hfox] at alt,
+      right,
+      rw T.mem_coset_iff hxnez,
+      split,
+      simp [not_or_distrib],
+      refine ⟨⟨hxnez, hx2⟩,_⟩,
+      simp [hx, hfox],
+      simp [not_or_distrib],
+      refine ⟨⟨hxnez, hx2⟩,_⟩,
+      simp [alt] },
+    { sorry }
+  }
 end

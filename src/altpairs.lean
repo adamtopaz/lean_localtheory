@@ -86,6 +86,13 @@ def ker (f : log K F) : mult_subgroup K :=
 
 @[simp] lemma mem_ker_iff {x : K} : x ∈ f.ker ↔ x ≠ 0 ∧ f x = 0 := by tidy
 
+@[simp] lemma nmem_ker_iff {x : K} : x ∉ f.ker ↔ x = 0 ∨ f x ≠ 0 :=
+begin
+  erw mem_ker_iff,
+  simp,
+  tauto,
+end
+
 end log
 
 def alternating (f g : log K F) : Prop := ∀ x : K, f x * g (1 - x) = f (1 - x) * g x
