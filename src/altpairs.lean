@@ -2,6 +2,12 @@ import .mult_subgroup.basic
 import tactic
 import algebra
 
+/--
+A `log` is simply a morphism of groups from `(K^×,×)` to `(F,+)`.
+The `0 : K` is considered a "junk value".
+We declare that it must go to `0` for simplicity.
+-/
+
 @[ext]
 structure log (K F : Type*) [field K] [field F] :=
 (to_fun : K → F)
@@ -77,6 +83,10 @@ instance : module F (log K F) :=
   add_smul := λ a b f, by {ext, simp [add_mul]},
   zero_smul := λ f, by {ext, simp} }
 
+/--
+The "kernel" of `f : log K F` is a multiplicative group in `K`.
+It is the collection of nonzero elements of `K` which map trivially under `f`.
+-/
 def ker (f : log K F) : mult_subgroup K :=
 { carrier := {x | x ≠ 0 ∧ f x = 0},
   zero_nmem' := λ c, c.1 rfl,

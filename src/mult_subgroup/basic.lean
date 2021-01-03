@@ -4,6 +4,10 @@ import tactic
 
 variables (K : Type*) [field K]
 
+/--
+A multiplicative subgroup of a field `K` is a subgroup of `K^×`.
+-/
+
 @[ext]
 structure mult_subgroup :=
 (carrier : set K)
