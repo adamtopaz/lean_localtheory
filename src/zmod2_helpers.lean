@@ -14,7 +14,7 @@ instance is_prime_2 : fact (nat.prime 2) := nat.prime_two
 
 @[simp] lemma zmod2_add_self {a : zmod 2} : a + a = 0 := by {rw (show a + a = 2 * a, by ring), simp}
 
-variables (K : Type*) [field K]
+variables {K : Type*} [field K]
 
 lemma neg_one_mem_ker (f : log K (zmod 2)) (cond : ∃ a : K, a * a = -1) : (-1 : K) ∈ f.ker :=
 begin
