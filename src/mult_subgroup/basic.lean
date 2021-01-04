@@ -92,6 +92,13 @@ lemma ne_zero_of_one_minus_mul_left {a b : K} : 1 - a * b ∉ H → a ≠ 0 :=
 lemma ne_zero_of_one_minus_mul_right {a b : K} : 1 - a * b ∉ H → b ≠ 0 :=
 λ h c, h $ by simp [c, H.one_mem]
 
+instance : has_top (mult_subgroup K) := has_top.mk $
+{ carrier := {x | x ≠ 0},
+  zero_nmem' := by tauto,
+  one_mem' := one_ne_zero,
+  mul_mem' := λ x y hx hy, mul_ne_zero hx hy,
+  inv_mem' := λ x hx, inv_ne_zero hx }
+
 instance : has_inf (mult_subgroup K) := has_inf.mk $ λ A B,
 { carrier := A ∩ B,
   zero_nmem' := λ c, A.zero_nmem c.1,
@@ -99,6 +106,7 @@ instance : has_inf (mult_subgroup K) := has_inf.mk $ λ A B,
   mul_mem' := λ x y h1 h2, ⟨A.mul_mem h1.1 h2.1, B.mul_mem h1.2 h2.2⟩,
   inv_mem' := λ x h, ⟨A.inv_mem h.1, B.inv_mem h.2⟩ }
 
+lemma le_top (A : mult_subgroup K) : A ≤ ⊤ := λ a ha, A.ne_zero ha
 lemma inf_le_left (A B : mult_subgroup K) : A ⊓ B ≤ A := λ a h, h.1
 lemma inf_le_right (A B : mult_subgroup K) : A ⊓ B ≤ B := λ b h, h.2
 

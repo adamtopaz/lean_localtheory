@@ -1,5 +1,5 @@
 import .maintheorem
-import .altpairs
+import .log
 import .zmod2_helpers
 
 variables (K : Type*) [field K]
