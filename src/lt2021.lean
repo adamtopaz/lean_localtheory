@@ -1,6 +1,13 @@
---import .maintheorem
---import .log
---import .zmod2_helpers
+import .maintheorem
+import .log
+import .zmod2_helpers
+
+/-!
+This is a formalization of the "theory of rigid elements" based on the following references:
+
+1. Ware. "Valuation rings and rigid elements in fields." Canad. J. Math. 33 (1981)
+2. Arason, Elman, Jacob. "Rigid Elements, Valuations, and Realization of Witt Rings". J. Algebra 110 (1987)
+-/
 
 --variables (K : Type*) [field K]
 --variables (f g : log K (zmod 2))
