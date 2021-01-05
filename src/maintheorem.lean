@@ -13,8 +13,8 @@ theorem maintheorem : ∃ (R : val_subring K) {x : K} (hx : x ≠ 0),
   x * x ∈ H ∧ R.units ⊆ (H.adjoin hx) ∧ R.principal_units ⊆ T :=
 begin
   let RP : rig_pair K := ⟨T, H, incl, _⟩,
-  rcases index_two RP with ⟨x,hx,h1,h2⟩,
-  let R := to_val (RP.adjoin hx) h2,
+  rcases index_two RP with ⟨x,hx,h1,h2⟩, -- Key I: indextwo.lean
+  let R := to_val (RP.adjoin hx) h2, -- Key II: to_val.lean
   refine ⟨R,x,hx,h1,_,_⟩,
   exact rig_pair.units_sub _,
   exact rig_pair.principal_units_sub _,
