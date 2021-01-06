@@ -9,13 +9,6 @@ This is a formalization of the "theory of rigid elements" based on the following
 2. Arason, Elman, Jacob. "Rigid Elements, Valuations, and Realization of Witt Rings". J. Algebra 110 (1987)
 -/
 
---variables (K : Type*) [field K]
---variables (f g : log K (zmod 2))
---variables (cond : ∃ a : K, a * a = -1)
---variables (alt : ∀ x : K, f x *  g (1 - x) = f (1 - x) * g x) -- Steinberg alternating condition.
-
---include alt cond
-
 --#check log
 --#check val_subring
 --#check mult_subgroup
@@ -29,6 +22,41 @@ This is a formalization of the "theory of rigid elements" based on the following
 --#check to_val
 --#check index_two
 --#check maintheorem
+
+--variables (K : Type*) [field K]
+--variables (f g : log K (zmod 2))
+--variables (cond : ∃ a : K, a * a = -1)
+--variables (alt : ∀ x : K, f x *  g (1 - x) = f (1 - x) * g x) -- Steinberg alternating condition.
+
+--include alt cond
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 --example : ∃ (R : val_subring K) (a b : zmod 2),
 --  (a ≠ 0 ∨ b ≠ 0) ∧
