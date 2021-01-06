@@ -19,9 +19,11 @@ This is a formalization of the "theory of rigid elements" based on the following
 --#check log
 --#check val_subring
 --#check mult_subgroup
+--#check mult_subgroup.adjoin -- adjoin element to mult_subgroup
 --#check mult_subgroup.rigid
 --#check mult_subgroup.birigid
 --#check rig_pair
+--#check rig_pair.adjoin -- adjoin element to R.H for R : rig_pair
 --#check rig_pair.OO
 --#check preadd
 --#check to_val
